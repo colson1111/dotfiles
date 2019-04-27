@@ -65,7 +65,7 @@ filetype indent on     " load filetype-specific indent files
 set wildmenu           " visual autocopmlete for command menu
 set lazyredraw         " only redraw when needed
 set showmatch          " highlight matching [{(}
-
+set backspace=indent,eol,start " let backspace/delete key delete stuff while in insert mode"
 " map pane swithcing
 nnoremap <Leader>w <C-w>
 
