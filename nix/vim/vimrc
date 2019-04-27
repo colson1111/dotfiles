@@ -1,0 +1,114 @@
+
+set nocompatible  " required for Vundle
+filetype off      " required for Vundle
+set laststatus=2
+
+" set runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Let vundle manage Vundle
+Plugin 'gmarik/Vundle.vim'
+
+" Add plugins here
+Plugin 'itchyny/lightline.vim'  " nice looking status line at the bottoma
+Plugin 'auto-pairs-gentle'      " automatically adds pair for ([{}])
+Plugin 'bitc/vim-bad-whitespace' " hightlight trailing whitespace in red
+Plugin 'scrooloose/nerdtree'     " sidebar filetree
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'w0rp/ale'
+
+call vundle#end()
+filetype plugin indent on
+
+" ======================================
+" Colors
+" ======================================
+syntax enable            " enable syntax processing
+set t_Co=256             " Use 256 colors
+colorscheme gruvbox      " set color scheme
+
+" ======================================
+" Spaces and Tabs
+" ======================================
+set tabstop=4      " number of visual spaces per tab
+set softtabstop=4  " number of spaces in TAB when editing
+set expandtab      " make TABS spaces
+
+" ======================================
+" PEP8 Style
+" ======================================
+au BufNewFile,BufRead *.py
+  \ set tabstop=4      |
+  \ set softtabstop=4  |
+  \ set shiftwidth=4   |
+  \ set textwidth=99   |
+  \ set expandtab      |
+  \ set autoindent     |
+  \ set fileformat=unix
+
+" highlight whitespace at the end of lines in red
+au BufNewFile, BufRead *.py match BadWhitespace /\s\+$/
+
+" use utf-8 encoding
+set encoding=utf-8
+
+" ========================================
+" UI Config
+" ========================================
+set number             " show line numbers
+set relativenumber     " line numbers are relative to cursor
+set showcmd            " show command in bottom bar
+set cursorline         " highlights the current line
+filetype indent on     " load filetype-specific indent files
+set wildmenu           " visual autocopmlete for command menu
+set lazyredraw         " only redraw when needed
+set showmatch          " highlight matching [{(}
+
+" map pane swithcing
+nnoremap <Leader>w <C-w>
+
+" map NERDTreeToggle to Ctrl-O
+map <C-o> :NERDTreeToggle<CR>
+
+" always open NERDTree
+" autocmd vimenter * NERDTree
+
+" show hidden folders/files in NERDTree
+let NERDTreeShowHidden=1
+
+" =======================================
+" ALE (Asynchronous Linting Engine)
+" =======================================
+let g:ale_linters={'python': ['flake8']}
+let g:ale_sign_column_always=1 "keep sign gutter open
+let g:ale_sign_error = ">>"
+let g:ale_sign_warning = "--"
+let g:ale_linters_explicit=1 "only run linters named here
+
+" ========================================
+" Searching
+" ========================================
+set incsearch       " search as characters are entered
+set hlsearch        " highlight matches
+" turn off search highlighting with shift-s
+nnoremap <S-s> :silent! nohls<cr>
+
+" ========================================
+" Folding
+" ========================================
+set foldmethod=indent     " fold based on indent level
+set foldenable            " enable folding
+set foldlevelstart=10     " open most folds by default
+set foldnestmax=10        " nesting folds
+" space open/closes folds
+nnoremap <space> za
+vnoremap <space> zf
+
+" ========================================
+" Other Key Mapping
+" ========================================
+" remap escape to jk
+inoremap jk <esc>
+

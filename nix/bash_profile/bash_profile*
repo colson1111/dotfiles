@@ -1,0 +1,75 @@
+##############################
+# command prompt
+##############################
+export PS1="\w >> "
+export LC_CTYPE=C
+export LANG=C
+
+##############################
+# define some bash aliases
+###############################
+alias ll="ls -lhA"
+alias mkdir="mkdir -p"
+alias wget="wget -c"
+
+alias cdw="cd ~/workspace"
+alias cdd="cd ~/Documents"
+alias cdwb="cd ~/workspace/btyd_e"
+alias cdwj="cd ~/workspace/jobs"
+alias cdwo="cd ~/workspace/other_btyd_e"
+alias cdwp="cd ~/workspace/python-client"
+alias cdwpz="cd ~/workspace/python-client/zodiac"
+alias cdwd="cd ~/workspace/dakota"
+
+alias ls="ls -CF"
+
+alias virtualenv3='~/Library/Python/3.6/bin/virtualenv'
+
+##############################
+# Define functions
+##############################
+function dev {
+  gcloud config set project zodiac-dev
+  gcloud container clusters get-credentials zodiac-dev-2
+ }
+
+ function prod {
+   gcloud config set project zodiac-metrics
+   gcloud container clusters get-credentials zodiac-metrics-1
+ }
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/craig/google-cloud-sdk/path.bash.inc' ]; then source '/Users/craig/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/craig/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/craig/google-cloud-sdk/completion.bash.inc'; fi
+BTYDE_DIR=/Users/craig/workspace/btyd_e
+
+# Setting PATH for Python 3.6
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+export PATH
+
+# added by Miniconda3 installer
+export PATH="/Users/craig/miniconda3/bin:$PATH"
+
+# add go to PATH
+export PATH=$PATH:/usr/local/go/bin
+
+# added by Anaconda3 5.3.0 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/anaconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<
